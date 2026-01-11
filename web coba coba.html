@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geely Indonesia | Premium Excellence</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Gradasi Hitam ke Abu-abu sesuai permintaan */
+            --bg-gradient: linear-gradient(135deg, #0f0f0f 0%, #252525 100%);
+            --accent-gold: #c5a059;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* --- LUXURY NAVIGATION BAR --- */
+        header {
+            width: 90%;
+            max-width: 1100px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 25px;
+            z-index: 1000;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+        }
+
+        .logo { font-size: 22px; font-weight: 800; letter-spacing: 5px; cursor: pointer; }
+        .logo span { color: var(--accent-gold); }
+
+        nav { display: flex; gap: 30px; }
+        nav a {
+            color: #888;
+            text-decoration: none;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: var(--transition);
+            cursor: pointer;
+            font-weight: 400;
+        }
+        nav a:hover, nav a.active { color: white; }
+
+        /* --- PAGE SYSTEM --- */
+        .page {
+            display: none;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 150px;
+            padding: 0 20px 80px;
+            animation: slideUp 0.8s ease forwards;
+        }
+        .page.active { display: block; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- HOME SECTION --- */
+        .hero { text-align: center; }
+        .hero h1 { font-size: 70px; font-weight: 200; margin-bottom: 10px; }
+        .hero h1 b { font-weight: 800; }
+        
+        .car-display {
+            position: relative;
+            margin: 50px 0;
+            display: flex;
+            justify-content: center;
+        }
+        #car-main {
+            width: 100%;
+            max-width: 850px;
+            filter: drop-shadow(0 30px 50px rgba(0,0,0,0.8));
+            transition: var(--transition);
+        }
+
+        .palette { display: flex; justify-content: center; gap: 20px; }
+        .swatch {
+            width: 20px; height: 20px; border-radius: 50%; cursor: pointer;
+            border: 2px solid #444; transition: 0.3s;
+        }
+        .swatch.active { transform: scale(1.5); border-color: white; box-shadow: 0 0 15px var(--accent-gold); }
+
+        /* --- MODELS GRID --- */
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .card {
+            background: rgba(255,255,255,0.03);
+            padding: 30px;
+            border-radius: 25px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .card:hover { background: rgba(255,255,255,0.07); transform: translateY(-10px); }
+        .card img { width: 100%; margin-bottom: 20px; }
+
+        /* --- ABOUT & AFTERSALES --- */
+        .content-flex { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .text-area h2 { font-size: 40px; margin-bottom: 20px; font-weight: 700; }
+        .text-area p { color: #aaa; line-height: 1.8; margin-bottom: 30px; }
+
+        /* --- BUTTONS --- */
+        .btn-wa {
+            background: #25D366;
+            color: white;
+            padding: 15px 35px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+        .btn-wa:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); }
+
+        /* --- FLOATING WHATSAPP --- */
+        .float-wa {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 2000;
+            transition: 0.3s;
+        }
+        .float-wa:hover { transform: rotate(15deg) scale(1.1); }
+
+        /* --- FOOTER --- */
+        footer { padding: 50px; color: #555; font-size: 11px; letter-spacing: 2px; }
+
+        @media (max-width: 850px) {
+            .grid, .content-flex { grid-template-columns: 1fr; }
+            header { padding: 10px 20px; width: 95%; }
+            nav { gap: 10px; }
+            nav a { font-size: 8px; }
+            .hero h1 { font-size: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://wa.me/628123456789" class="float-wa" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <header>
+        <div class="logo" onclick="showPage('home')">GEELY<span>.</span></div>
+        <nav>
+            <a onclick="showPage('home')" id="nav-home" class="active">Home</a>
+            <a onclick="showPage('models')" id="nav-models">Models</a>
+            <a onclick="showPage('about')" id="nav-about">About</a>
+            <a onclick="showPage('aftersales')" id="nav-aftersales">Aftersales</a>
+            <a onclick="showPage('contact')" id="nav-contact">Contact</a>
+        </nav>
+    </header>
+
+    <main id="home" class="page active">
+        <section class="hero">
+            <h1>GEELY <b>MONJARO</b></h1>
+            <p style="color: #666; letter-spacing: 5px; font-size: 12px;">ULTIMATE LUXURY SUV</p>
+            
+            <div class="car-display">
+                <img id="car-main" src="https://ik.imagekit.io/geelyindonesia/COOLRAY/2024_Coolray_SUV_P_PearlWhite_FrontAngle.png">
+            </div>
+
+            <div class="palette">
+                <div class="swatch active" style="background: white;" onclick="updateCar('https://ik.imagekit.io/geelyindonesia/COOLRAY/2024_Coolray_SUV_P_PearlWhite_FrontAngle.png', this)"></div>
+                <div class="swatch" style="background: #111;" onclick="updateCar('https://ik.imagekit.io/geelyindonesia/COOLRAY/2024_Coolray_SUV_P_ObsidianBlack_FrontAngle.png', this)"></div>
+                <div class="swatch" style="background: #002366;" onclick="updateCar('https://ik.imagekit.io/geelyindonesia/COOLRAY/2024_Coolray_SUV_P_OceanBlue_FrontAngle.png', this)"></div>
+                <div class="swatch" style="background: #800000;" onclick="updateCar('https://ik.imagekit.io/geelyindonesia/COOLRAY/2024_Coolray_SUV_P_CrimsonRed_FrontAngle.png', this)"></div>
+            </div>
+        </section>
+    </main>
+
+    <section id="models" class="page">
+        <h2 style="text-align: center; margin-bottom: 40px; font-weight: 200; letter-spacing: 3px;">OUR <b>LINEUP</b></h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://ik.imagekit.io/geelyindonesia/COOLRAY/2024_Coolray_SUV_P_PearlWhite_FrontAngle.png">
+                <h3>COOLRAY</h3>
+                <p style="font-size: 12px; color: #666; margin-top: 10px;">Smart Urban SUV</p>
+            </div>
+            <div class="card">
+                <img src="https://ik.imagekit.io/geelyindonesia/EMGRAND/2024_Emgrand_Sedan_P_ObsidianBlack_FrontAngle.png">
+                <h3>EMGRAND</h3>
+                <p style="font-size: 12px; color: #666; margin-top: 10px;">Elegant Luxury Sedan</p>
+            </div>
+            <div class="card">
+                <img src="https://ik.imagekit.io/geelyindonesia/AZKARRA/2024_Azkarra_SUV_P_OceanBlue_FrontAngle.png">
+                <h3>AZKARRA</h3>
+                <p style="font-size: 12px; color: #666; margin-top: 10px;">Premium Hybrid SUV</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="page">
+        <div class="content-flex">
+            <div class="text-area">
+                <h2>SHAPING THE <span>FUTURE.</span></h2>
+                <p>Geely Automobile adalah pionir teknologi mobilitas global. Kami berkomitmen untuk menghadirkan kendaraan dengan standar keamanan tertinggi, desain inovatif, dan teknologi ramah lingkungan untuk masa depan Indonesia.</p>
+                <div style="display: flex; gap: 30px;">
+                    <div><h3 style="color:var(--accent-gold)">100+</h3><p style="font-size: 10px;">Global Markets</p></div>
+                    <div><h3 style="color:var(--accent-gold)">5</h3><p style="font-size: 10px;">R&D Centers</p></div>
+                </div>
+            </div>
+            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800" style="width:100%; border-radius: 30px; filter: grayscale(0.5);">
+        </div>
+    </section>
+
+    <section id="aftersales" class="page">
+        <div class="content-flex">
+            <div class="card" style="text-align: left;">
+                <h2 style="color:var(--accent-gold)">GEELY CARE</h2>
+                <p style="margin: 20px 0; font-weight: 300;">Layanan purna jual eksklusif untuk memastikan kenyamanan berkendara Anda tetap terjaga.</p>
+                <ul style="list-style: none; line-height: 2.5; font-size: 14px; color: #aaa;">
+                    <li><i class="fas fa-check-circle" style="color:var(--accent-gold)"></i> Garansi Mesin 5 Tahun</li>
+                    <li><i class="fas fa-check-circle" style="color:var(--accent-gold)"></i> Gratis Jasa Servis Berkala</li>
+                    <li><i class="fas fa-check-circle" style="color:var(--accent-gold)"></i> Suku Cadang Asli Tersedia</li>
+                </ul>
+            </div>
+            <div style="text-align: center;">
+                <h3>Butuh Perbaikan?</h3>
+                <p style="color:#666; margin: 20px 0;">Hubungi Service Advisor kami melalui WhatsApp untuk booking jadwal.</p>
+                <a href="https://wa.me/628123456789" class="btn-wa"><i class="fab fa-whatsapp"></i> HUBUNGI AFTERSALES</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="page">
+        <div class="content-flex">
+            <div class="text-area">
+                <h2>GET IN <span>TOUCH.</span></h2>
+                <p>Kunjungi showroom kami atau hubungi tim sales kami untuk informasi promo terbaru dan test drive.</p>
+                <p style="font-size: 14px;"><i class="fas fa-map-marker-alt" style="color:var(--accent-gold)"></i> Jakarta, Indonesia</p>
+                <p style="font-size: 14px; margin-top: 10px;"><i class="fas fa-envelope" style="color:var(--accent-gold)"></i> info@geely-indonesia.id</p>
+            </div>
+            <div class="card">
+                <input type="text" placeholder="Nama Lengkap" style="width:100%; padding:15px; background:rgba(255,255,255,0.05); border:1px solid #333; color:white; border-radius:10px; margin-bottom:15px; outline:none;">
+                <input type="email" placeholder="Email" style="width:100%; padding:15px; background:rgba(255,255,255,0.05); border:1px solid #333; color:white; border-radius:10px; margin-bottom:15px; outline:none;">
+                <button style="width:100%; padding:15px; background:white; color:black; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">KIRIM PESAN</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 GEELY INDONESIA. THE ART OF MOTION.
+    </footer>
+
+    <script>
+        // NAVIGATION SYSTEM
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+
+            // Update Nav Active State
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            const activeLink = document.getElementById('nav-' + pageId);
+            if(activeLink) activeLink.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // CAR VISUALIZER
+        function updateCar(imgUrl, element) {
+            const carImg = document.getElementById('car-main');
+            carImg.style.opacity = '0';
+            
+            setTimeout(() => {
+                carImg.src = imgUrl;
+                carImg.style.opacity = '1';
+            }, 300);
+
+            document.querySelectorAll('.swatch').forEach(sw => sw.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
